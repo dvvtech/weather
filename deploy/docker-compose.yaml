@@ -1,10 +1,19 @@
-
 services:
   weather_api:
     container_name: weather-api-container
     build:
       context: ..
       dockerfile: src/Weather.Api/Dockerfile
-    ports:
-      - "5000:8080"    
     restart: unless-stopped    
+    networks:
+      - public-network
+    labels:      
+      - "traefik.enable=true"      
+      - "traefik.http.routers.weather-api.rule=Host(`api.cloud-platform.pro`)"      
+      - "traefik.http.routers.weather-api.entrypoints=websecure"      
+      - "traefik.http.routers.weather-api.tls.certresolver=letsencrypt"     
+      - "traefik.http.services.weather-api.loadbalancer.server.port=8080"
+
+networks:
+  public-network:
+    external: true
