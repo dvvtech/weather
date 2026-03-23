@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{EE565A55-5A1B-46DD-BD05-341C627362F7}"
 	ProjectSection(SolutionItems) = preProject
-		deploy\docker-compose.yaml = deploy\docker-compose.yaml
+		deploy\docker-compose.yml = deploy\docker-compose.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.Api", "src\Weather.Api\Weather.Api.csproj", "{3FF3A0B3-AC53-451F-8B31-B287BDE229D8}"
