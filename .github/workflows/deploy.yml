@@ -37,6 +37,7 @@ jobs:
           key: ${{ secrets.VM_SSH_KEY }}
           source: "deploy/docker-compose.yml"
           target: "/home/dvvtech/deploy/weather/"
+          strip_components: 1
       
       - name: Deploy to VM via SSH
         uses: appleboy/ssh-action@v1.0.3
