@@ -1,9 +1,7 @@
 services:
   weather_api:
     container_name: weather-api-container
-    build:
-      context: ..
-      dockerfile: src/Weather.Api/Dockerfile
+    image: ghcr.io/dvvtech/weather:latest    
     restart: unless-stopped    
     networks:
       - public-network
