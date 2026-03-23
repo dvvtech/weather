@@ -22,6 +22,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          file: src/Weather.Api/Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository }}:latest
       
@@ -32,7 +33,7 @@ jobs:
           username: ${{ secrets.VM_USER }}
           key: ${{ secrets.VM_SSH_KEY }}
           script: |
-            cd /opt/weather
+            cd /home/dvvtech/deploy/weather
             docker compose pull
             docker compose up -d
             docker image prune -f
