@@ -5,6 +5,8 @@ services:
     image: ghcr.io/dvvtech/weather:latest    
     networks:
       - public-network5
+    secrets:      
+      - test_key
     deploy:
       mode: replicated
       replicas: 1
@@ -23,3 +25,7 @@ networks:
   public-network5:
     external: true
     name: public-network5
+
+secrets:  
+  test_key:
+    external: true

@@ -21,6 +21,18 @@ public class WeatherForecastController : ControllerBase
     [HttpGet]
     public IEnumerable<WeatherForecast> Get()
     {
+        var secretsPath = "/run/secrets";
+        var ipFile = Path.Combine(secretsPath, "test_key");
+        if (System.IO.File.Exists(ipFile))
+        {
+            var secret = System.IO.File.ReadAllText(ipFile).Trim();
+            _logger.LogInformation("secret: " + secret);
+        }
+        else
+        {
+            _logger.LogInformation("not found");
+        }
+
         _logger.LogInformation("hello");
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
