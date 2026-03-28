@@ -2,10 +2,9 @@ version: '3.8'
 
 services:
   weather_api:
-    image: ghcr.io/dvvtech/weather:latest
-    restart: unless-stopped
+    image: ghcr.io/dvvtech/weather:latest    
     networks:
-      - public-network2
+      - public-network5
     deploy:
       mode: replicated
       replicas: 1
@@ -21,5 +20,6 @@ services:
         - "traefik.http.routers.weather-api.middlewares=weather-stripprefix"
 
 networks:
-  public-network2:
+  public-network5:
     external: true
+    name: public-network5
