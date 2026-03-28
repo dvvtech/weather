@@ -39,7 +39,7 @@ jobs:
           target: "/home/dvvtech/deploy/weather/"
           strip_components: 1
       
-      - name: Deploy to VM via SSH
+      - name: Deploy to VM via SSH (Swarm mode)
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VM_HOST }}
@@ -47,6 +47,20 @@ jobs:
           key: ${{ secrets.VM_SSH_KEY }}
           script: |
             cd /home/dvvtech/deploy/weather
+            
+            # Pull the latest images
             docker compose pull
-            docker compose up -d
+            
+            # Deploy/Update the stack (this creates/updates services)
+            docker stack deploy -c docker-compose.yml weather-stack
+            
+            # Wait a few seconds for services to stabilize
+            sleep 5
+            
+            # Clean up unused images
             docker image prune -f
+            
+            # Show deployed services (for debugging)
+            docker service ls
+            echo "Deployment completed. Services status:"
+            docker service ls --filter name=weather-stack
