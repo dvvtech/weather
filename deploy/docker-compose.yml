@@ -17,7 +17,7 @@ services:
         - "traefik.http.routers.weather-api.tls.certresolver=letsencrypt"
         - "traefik.http.services.weather-api.loadbalancer.server.port=8080"
         - "traefik.http.middlewares.weather-stripprefix.stripprefix.prefixes=/weather"
-        - "traefik.http.routers.weather-api.middlewares=weather-stripprefix"
+        - "traefik.http.routers.weather-api.middlewares=weather-stripprefix@docker"
 
 networks:
   public-network5:
