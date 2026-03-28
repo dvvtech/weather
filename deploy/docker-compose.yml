@@ -1,18 +1,24 @@
+version: '3.8'
+
 services:
   weather_api:
-    container_name: weather-api-container
-    image: ghcr.io/dvvtech/weather:latest    
-    restart: unless-stopped    
+    image: ghcr.io/dvvtech/weather:latest
+    restart: unless-stopped
     networks:
       - public-network
-    labels:      
-      - "traefik.enable=true"      
-      - "traefik.http.routers.weather-api.rule=Host(`api.cloud-platform.pro`) && PathPrefix(`/weather`)"      
-      - "traefik.http.routers.weather-api.entrypoints=websecure"      
-      - "traefik.http.routers.weather-api.tls.certresolver=letsencrypt"     
-      - "traefik.http.services.weather-api.loadbalancer.server.port=8080"
-      - "traefik.http.middlewares.weather-stripprefix.stripprefix.prefixes=/weather"
-      - "traefik.http.routers.weather-api.middlewares=weather-stripprefix"
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.weather-api.rule=Host(`api.cloud-platform.pro`) && PathPrefix(`/weather`)"
+        - "traefik.http.routers.weather-api.entrypoints=websecure"
+        - "traefik.http.routers.weather-api.tls.certresolver=letsencrypt"
+        - "traefik.http.services.weather-api.loadbalancer.server.port=8080"
+        - "traefik.http.middlewares.weather-stripprefix.stripprefix.prefixes=/weather"
+        - "traefik.http.routers.weather-api.middlewares=weather-stripprefix"
 
 networks:
   public-network:
