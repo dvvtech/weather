@@ -1,1 +1,4 @@
 ﻿Traefik выступает в роли обратного прокси и SSL-терминатора, перенаправляя запросы с https://api.cloud-platform.pro на контейнер вашего сервиса.
+
+https://api.cloud-platform.pro/weather/weatherforecast
+
